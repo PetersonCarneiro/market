@@ -1,9 +1,12 @@
 package com.market.entities;
 
 import jakarta.persistence.*;
+
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "users")
 @Table(name = "users")
@@ -16,7 +19,8 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
-    //private Order order;
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders = new ArrayList<>();
 
     public User(){
 
@@ -83,5 +87,10 @@ public class User implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }
