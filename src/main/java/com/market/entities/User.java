@@ -1,5 +1,6 @@
 package com.market.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,7 @@ public class User implements Serializable {
     private String email;
     private String phone;
     private String password;
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
