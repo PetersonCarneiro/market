@@ -17,6 +17,7 @@ public class Order {
     private Long id;
     @JsonFormat(shape= JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant data;
+    private  Integer orderStatus;
 
 
     @ManyToOne
@@ -27,10 +28,11 @@ public class Order {
 
     }
 
-    public Order(Long id, Instant data, User user) {
+    public Order(Long id, Instant data, User user,OrderStatus orderStatus) {
         this.id = id;
         this.data = data;
         this.user = user;
+        setOrderStatus(orderStatus);
     }
 
     public Long getId() {
@@ -55,5 +57,15 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(orderStatus);
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if(orderStatus!=null){
+            this.orderStatus = orderStatus.getCode();
+        }
     }
 }
